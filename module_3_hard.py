@@ -8,13 +8,16 @@ def calculate_structure_sum(args):
         elif isinstance(i, str):
             total_sum += len(i)
         if isinstance(args, dict):
-            total_sum += args[i]
+            if isinstance(args[i], int):
+                total_sum += args[i]
+            else:
+                total_sum += len(args[i])
     return total_sum
 
 data_structure = [
     [1, 2, 3],
     {'a': 4, 'b': 5},
-    (6, {'cube': 7, 'drum': 8}),
+    (6, {'cube': "23434", 'drum': 8}),
     "Hello",
     ((), [{(2, 'Urban', ('Urban2', 35))}])
 ]
