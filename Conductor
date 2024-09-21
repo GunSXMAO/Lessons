@@ -1,0 +1,37 @@
+import tkinter
+import os
+from tkinter import filedialog
+from tkinter import Menu
+from tkinter import messagebox
+
+
+def file_select():
+    filename = filedialog.askopenfilename(initialdir='/', title='Выберите файл',
+                                          filetypes=(('Текстовый файл', '*.txt'), ('Все файлы', '*.*')))
+    text['text'] = text['text'] + ' ' + filename
+    os.startfile(filename)
+
+
+window = tkinter.Tk()
+window.title("Проводник")
+window.geometry("400x200")
+window.configure(background='lightblue')
+window.resizable(False, False)
+text = tkinter.Label(window, text='Файл:', height=5, width=58, background='silver', foreground='blue')
+text.grid(row=1, column=1)
+button_select = tkinter.Button(window, width=35, height=5, text='Выбрать файл', background='white', foreground='blue',
+                               command=file_select)
+button_select.grid(row=2, column=1, pady=10)
+window.option_add('*tearOff', False)
+
+def about_program():
+    messagebox.showinfo('О программе', 'Автор программы Иван\nВерсия 1.0')
+def info_program():
+    messagebox.showinfo('Информация', 'Нажмите "выбрать файл", после чего он откроется в системном проводнике.')
+
+main_menu = Menu()
+main_menu.add_cascade(label='О программе', command = about_program)
+main_menu.add_cascade(label='Информация', command=info_program)
+
+window.config(menu=main_menu)
+window.mainloop()
